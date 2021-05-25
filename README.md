@@ -18,3 +18,10 @@ WEATHERBIT_KEY = {your key here}
 PIXABAY_KEY = {your key here}
 ```
 
+### TODO(before submitting) -- Show how to install and run the app.
+
+### TODO -- Show how to use the app.
+
+### Results with Screenshots.
+
+ - Add Screenshots here.
