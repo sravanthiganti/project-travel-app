@@ -1,22 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="utf-8">
-    <head>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, intial-scale=1.0"/>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      </head>
-    <title>Travel Weather App</title>
+        <title>Travel weather app</title>
 </head>
 
+
 <body>
- <h1>Travel APP for FEND CapStone.</h1>
+    <header>
+        <h1>Travel Weather App</h1>
+    </header>
+    <form id="input-form" class="input-form">
+      <div id="from-city" class="user-input">
+        <label for="from-city">From City</label>
+        <input type="text" id="From-city" placeholder="Enter from city">
+    </div>
+        <div id="destination" class="user-input">
+            <label for="destination-city">Destination City</label>
+            <input type="text" id="destination-city" placeholder="Enter destination city">
+        </div>
+        <div id="departure" class="user-input">
+            <label for="departure-date">Departure Date</label>
+            <input type="date" id="departure-date">
+        </div>
+        <div id="return" class="user-input">
+            <label for="return-date">Return Date</label>
+            <input type="date" id="return-date">
+        </div>
+    </div>
+  </div>
  
 </body>
 
