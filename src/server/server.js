@@ -28,12 +28,12 @@ console.log(`Printing geonames key  => ${process.env.GEONAMES_KEY}`)
 const GEONAMES_ROOT = "http://api.geonames.org/searchJSON?q="
 const GEONAMES_KEY_AND_PRAMS = `&username=${process.env.GEONAMES_KEY}&maxRows=1`
 
-app.post('/geonames', callGeonames)
+app.get('/index', function(request,response){
+    response.sendFile('index.html',{ root: 'src/client/views' })
+})
 
-/* function callGeonames(){} 
-*/
 
-const callGeonames = (request,response) => {
+const callGeonames = async (request,response) => {
 
     const city = 'Toronto'
     console.log(`request city is ${city}`)
@@ -56,6 +56,9 @@ const callGeonames = (request,response) => {
     }
 
 }
+
+app.post('/geonames', callGeonames)
+
 
 app.listen(port,
     () => console.log(`This app listening on port ${port}!`)

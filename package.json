@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node src/server/start.js",
+    "start": "node src/server/server.js",
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "build": "webpack --config webpack.prod.js"
   },
@@ -23,7 +23,7 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "countdown": "^2.6.0",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1"
   },
