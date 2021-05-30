@@ -111,22 +111,35 @@ const callPixabay = (pixaRequest,pixaResponse) => {
 
     const destinationCity = pixaRequest.body.userData.destinationCity
     let pixabayCompleteURL = PIXABAY_ROOT + destinationCity + PIXABAY_KEY_URL_AND_PARAMS
+
+    const destinationCountry = pixaRequest.body.cityData.country
+    let pixabayCountryURL = PIXABAY_ROOT + destinationCountry + PIXABAY_KEY_URL_AND_PARAMS
    
     console.log(`pixabay complete url is ${pixabayCompleteURL}`)
 
     try{
         const response = fetch(pixabayCompleteURL)
         if(!response.ok){
-            wbResponse.send(null)
+            pixaResponse.send(null)
             console.error("hey i didn't proper response from pixabay")
         } else {
             const jsonResponse = await response.json()
             console.log(jsonResponse)
-            wbResponse.send(jsonResponse)
+            // Add a check if we didn't a image a for a city
+            if(jsonResponse.total === 0){
+                console.log("No images are avalaible for the destination city, we are showing the image for country")
+                // We didn't get image for city. Let's show one for the country.
+                const response = fetch(pixabayCountryURL)
+                if(!response.ok){
+                    pixaResponse.send(null)
+                    console.error("We didn't get country image from pixabay")
+                }
+            }
+            pixResponse.send(jsonResponse)
         }
 
     }catch(error){
-        wbResponse.send(null)
+        pixaResponse.send(null)
         console.error(`Error is this - ${error}`)
     }
    
