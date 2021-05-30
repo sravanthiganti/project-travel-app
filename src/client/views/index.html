@@ -11,8 +11,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <title>Travel weather app</title>
 </head>
-
-
 <body>
     <header>
         <h1>Travel Weather App</h1>
@@ -21,22 +19,28 @@
       <div id="from-city" class="user-input">
         <label for="from-city">From City</label>
         <input type="text" id="From-city" placeholder="Enter from city">
-    </div>
-        <div id="destination" class="user-input">
-            <label for="destination-city">Destination City</label>
-            <input type="text" id="destination-city" placeholder="Enter destination city">
-        </div>
-        <div id="departure" class="user-input">
+      </div>
+      <div id="destination" class="user-input">
+        <label for="destination-city"> Destination City</label>
+        <input type="text" id="Destination city" placeholder="Enter destination city">
+      </div>
+      <div id="departure" class="input-field col s6">
+            <input type="date" id="departure-date" class="validate">
             <label for="departure-date">Departure Date</label>
-            <input type="date" id="departure-date">
-        </div>
-        <div id="return" class="user-input">
+      </div>
+        <div id="return" class="input-field col s6">
+            <input type="date" id="return-date" class="validate">
             <label for="return-date">Return Date</label>
-            <input type="date" id="return-date">
         </div>
-    </div>
-  </div>
- 
+        <div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+               <i class="material-icons right">send</i>
+            </button>
+            <a onClick="window.print()" class="waves-effect waves-light btn">Print this Page</a>
+            <a class="waves-effect waves-light btn" type="submit" id="clear-button" value="Clear Saved Data" >Clear the data</a>
+         </div>
+        <div id="error-message" class="error-message"></div>
+    </form>
 </body>
 
 </html>
