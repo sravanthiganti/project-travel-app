@@ -24,20 +24,41 @@ module.exports = app
 // Set up for geonames API.
 
 console.log(`Printing geonames key  => ${process.env.GEONAMES_KEY}`)
-
 const GEONAMES_ROOT = "http://api.geonames.org/searchJSON?q="
 const GEONAMES_KEY_AND_PRAMS = `&username=${process.env.GEONAMES_KEY}&maxRows=1`
+
+// set up for weatherbit API.
+console.log(`Weatherbit API key  => ${process.env.GEONAMES_KEY}`)
+const WEATHERBIT_ROOT = "https://api.weatherbit.io/v2.0/forecast/daily?"
+const WEATHERBIT_KEY_URL_AND_PARAMS = `&key=${process.env.WEATHERBIT_KEY}&units=`
+
+// set up for pixabay API
+console.log(`Pixabay API key  => ${process.env.GEONAMES_KEY}`)
+const PIXABAY_ROOT = "https://pixabay.com/api/?q="
+const PIXABAY_KEY_URL_AND_PARAMS = `&key=${process.env.PIXABAY_KEY}&image_type=photo&orientation=horizontal&safesearch=true&per_page=100`
+
 
 app.get('/index', function(request,response){
     response.sendFile('index.html',{ root: 'src/client/views' })
 })
 
 
-const callGeonames = async (request,response) => {
+// Initalize an array to store API data 
+const apiData = []
 
-    const city = 'Toronto'
+const storeApiData = (request,response) => {
+   // store all api response body here.
+   apiData.push(request.body)
+   responseMessage = {message:'Successfuly saved the api data'}
+   response.send(responseMessage)
+   console.log(responseMessage)
+}
+
+const callGeonames = async (request,response) => {
+     // const city = 'Toronto' 
+    const city = req.body.userData.destinationCity
     console.log(`request city is ${city}`)
-    //const city = req.body.userData.destinationCity
+
     const geonamesCompleteURL = GEONAMES_ROOT + city + GEONAMES_KEY_AND_PRAMS
     console.log(`geonamesCompleteURL is ${geonamesCompleteURL}`)
 
@@ -52,14 +73,72 @@ const callGeonames = async (request,response) => {
         response.send(jsonResponse)
        }
     } catch(error) {
-       console.error(`Error is this - ${error}`)
+        response.send(null)
+        console.error(`Error is this - ${error}`)
+
     }
 
 }
 
+const callWeatherbit = async (wbRequest,wbResponse) => {
+    const latitude = wbRequest.body.cityData.latitude
+    const longitude = wbRequest.body.cityData.longitude
+
+    const locationURL = `lat=${latitude}&lon=${longitude}`
+    const units = wbRequest.body.userData.units
+
+    const weatherbitCompleteURL = WEATHERBIT_ROOT + `lat=${latitude}&lon=${longitude}` + WEATHERBIT_KEY_URL_AND_PARAMS + units
+    console.log(`Weahter bit complete url is ${weatherbitCompleteURL}`)
+
+    try {
+        const response = fetch(weatherbitCompleteURL)
+        if(!response.ok){
+            wbResponse.send(null)
+            console.error("hey i didn't proper response from weatherbit")
+        } else {
+            const jsonResponse = await response.json()
+            console.log(jsonResponse)
+            wbResponse.send(jsonResponse)
+        }
+
+    }catch(error){
+        wbResponse.send(null)
+        console.error(`Error is this - ${error}`)
+    }
+}
+
+const callPixabay = (pixaRequest,pixaResponse) => {
+
+    const destinationCity = pixaRequest.body.userData.destinationCity
+    let pixabayCompleteURL = PIXABAY_ROOT + destinationCity + PIXABAY_KEY_URL_AND_PARAMS
+   
+    console.log(`pixabay complete url is ${pixabayCompleteURL}`)
+
+    try{
+        const response = fetch(pixabayCompleteURL)
+        if(!response.ok){
+            wbResponse.send(null)
+            console.error("hey i didn't proper response from pixabay")
+        } else {
+            const jsonResponse = await response.json()
+            console.log(jsonResponse)
+            wbResponse.send(jsonResponse)
+        }
+
+    }catch(error){
+        wbResponse.send(null)
+        console.error(`Error is this - ${error}`)
+    }
+   
+}
+
+app.post('storeApiData', storeApiData)
 app.post('/geonames', callGeonames)
+app.post('/weatherbit',callWeatherbit)
+app.post('/pixabay', callPixabay)
+
 
 
 app.listen(port,
-    () => console.log(`This app listening on port ${port}!`)
+    () => console.log(`Travel weather app is listening on port ${port}!`)
 )
