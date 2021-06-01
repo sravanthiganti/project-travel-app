@@ -43,10 +43,12 @@ export const callApis = async (apiData) => {
 
   apiData["extractRandomPhoto"] =  Client.extractRandomPhoto(pixabayResponse)
   apiData["pixabayResponse"] = pixabayResponse
-  console.log(apiData. extractRandomPhoto)
+  console.log(apiData.extractRandomPhoto)
   
  const storeApiData = await apiCaller('/storeApiData',apiData)
  console.log(`apiData is stored with this message => ${storeApiData}`)
+
+ return apiData
 }
 
 

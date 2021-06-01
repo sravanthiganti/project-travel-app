@@ -16,7 +16,7 @@ export const updateUI = (apiData) => {
 
     // Image of the location
     const locationImage = document.createElement('img')
-    locationImage.src = apiData.photo
+    locationImage.src = apiData.extractRandomPhoto
     locationImage.alt = `Photo taken in ${apiData.userData.destinationCity}`
     locationImage.height = 225
     locationImage.width = 300
@@ -41,8 +41,8 @@ export const updateUI = (apiData) => {
         // Get a random photo, clear storage, set storage again
         // The resetting of the storage makes sure that same photo will
         // be loaded again if user comes back
-        apiData.photo = Client.extractRandomPhoto(apiData.photoData)
-        locationImage.src = apiData.photo
+        apiData.extractRandomPhoto = Client.extractRandomPhoto(apiData.pixabayResponse)
+        locationImage.src = apiData.extractRandomPhoto
         localStorage.clear()
         localStorage.setItem('apiData', JSON.stringify(apiData))
     })
@@ -69,7 +69,7 @@ export const updateUI = (apiData) => {
         forecastCardContainer.append(fragment)
         return
     }
-    const forecasts = apiData.forecastData
+    const forecasts = apiData.WeatherForecastData
 
     // Create a forecast card for each day in the trip
     for (const forecast of forecasts) {

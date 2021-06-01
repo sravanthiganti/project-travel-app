@@ -25,7 +25,7 @@ export const createForecastCard = (forecast, units) => {
     // Create icon div, link to icon image
     const icon = document.createElement('img')
     icon.classList.add('icon')
-    icon.src = `./icons/${forecast.icon}.png`
+    icon.src = `./images/${forecast.icon}.png`
     icon.alt = ""
 
     // Create weather description div

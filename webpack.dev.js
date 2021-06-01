@@ -29,7 +29,7 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]',
-                    outputPath: 'icons'
+                    outputPath: 'images'
                 }
             },
             {
@@ -52,6 +52,6 @@ module.exports = {
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
-        new FaviconsWebpackPlugin('./src/client/icons/favicon.ico'),
+        new FaviconsWebpackPlugin('./src/client/images/favicon.ico'),
     ]
 }

@@ -62,15 +62,16 @@ export const submitted = async (event) => {
     // Initialise apiData object with user's input and calculations above
     let apiData = {}
     apiData["userData"] = { destinationCity, departureDate, returnDate, timeUntilTrip, timeUntilReturn, tripDuration, units }
-    console.log(apiData)
+    console.log(`api data from app.js is ${apiData}`)
 
     // Calls the API function, then updates the UI if all connections succeeded
     apiData = await Client.callApis(apiData)
-    // If connections didn't succeed, null is returned, so checking for that
+    console.log(`api data after client calls from app.js is ${apiData}`)
+
     if (apiData != null) {
         Client.updateUI(apiData)
 
-        // Add all data to local storage
+        // data  added to local storage
         localStorage.setItem('apiData', JSON.stringify(apiData))
     }
 }

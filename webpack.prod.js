@@ -31,7 +31,7 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]',
-                    outputPath: 'icons'
+                    outputPath: 'images'
                 }
             },
             {
@@ -57,7 +57,7 @@ module.exports = {
         new MiniCssExtractPlugin({ filename: "[name].css" }),
         new WorkboxPlugin.GenerateSW(),
         new FaviconsWebpackPlugin({
-            logo: './src/client/icons/favicon.ico',
+            logo: './src/client/images/favicon.ico',
             mode: 'light',
         }),
     ],
