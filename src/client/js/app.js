@@ -85,9 +85,9 @@ const getTimeUntilDate = (date) => {
 
 
 export const checkLocalStorage = (event) => {
-    if (localStorage.bigData) {
-        const bigData = JSON.parse(localStorage.getItem('apiData'))
-        Client.updateUI(bigData)
+    if (localStorage.apiData) {
+        const apiData = JSON.parse(localStorage.getItem('apiData'))
+        Client.updateUI(apiData)
     }
 }
 

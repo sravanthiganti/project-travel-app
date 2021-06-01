@@ -37,10 +37,15 @@ console.log(`Pixabay API key  => ${process.env.PIXABAY_KEY}`)
 const PIXABAY_ROOT = "https://pixabay.com/api/?q="
 const PIXABAY_KEY_URL_AND_PARAMS = `&key=${process.env.PIXABAY_KEY}&image_type=photo&orientation=horizontal&safesearch=true&per_page=45`
 
-
+/* 
 app.get('/index', function(request,response){
     response.sendFile('index.html',{ root: 'src/client/views' })
 })
+ */
+// Serves the main page 
+app.get('/',
+    (req, res) => res.sendFile('dist/index.html')
+)
 
 
 // Initalize an array to store API data 

@@ -26,10 +26,6 @@ import './styles/form.scss'
 import './styles/header.scss'
 
 
-// An IIFE to immediately set limits on date-picker selections in user form
-// This will run as soon as page loads, before user inputs anything or clicks
-// Earliest date is today for both calendars
-// Departure calendar has maximum 10 days from today, due to forecast limitation
 (function () {
     // Get today's date
     const d = new Date()
