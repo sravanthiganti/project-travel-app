@@ -107,7 +107,7 @@ const callWeatherbit = async (wbRequest,wbResponse) => {
     }
 }
 
-const callPixabay = (pixaRequest,pixaResponse) => {
+const callPixabay = async (pixaRequest,pixaResponse) => {
 
     const destinationCity = pixaRequest.body.userData.destinationCity
     let pixabayCompleteURL = PIXABAY_ROOT + destinationCity + PIXABAY_KEY_URL_AND_PARAMS
