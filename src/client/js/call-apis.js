@@ -45,7 +45,7 @@ export const callApis = async (apiData) => {
   apiData["pixabayResponse"] = pixabayResponse
   console.log(apiData. extractRandomPhoto)
   
- const storeApiData = await apiCaller('storeApiData',apiData)
+ const storeApiData = await apiCaller('/storeApiData',apiData)
  console.log(`apiData is stored with this message => ${storeApiData}`)
 }
 
@@ -56,7 +56,10 @@ export const callApis = async (apiData) => {
 
 const apiCaller = async (apiUrl,apiData) => {
      try{
-        const response = await fetch(`http://localhost:9999${apiUrl}`, {
+        console.log(`apiData is ${apiData}`)
+        const localUrl = `http://localhost:9999${apiUrl}`
+        console.log(`URL is ${localUrl}`)
+        const response = await fetch(localUrl, {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
@@ -71,11 +74,11 @@ const apiCaller = async (apiUrl,apiData) => {
             return null
         }
         const responseJSON = await response.json()
-        console.log(`response is ${json.stringify(responseJSON)}`)
+        console.log(`response is ${JSON.stringify(responseJSON)}`)
         return responseJSON
 
      }catch(error) {
-        console.error(`No sure what happened, we couldn't make api call -- error check the server logs ${error}`)
+        console.error(`No sure what happened, we couldn't make api call -- error check the server logs`)
         return null
      }
 }
@@ -177,7 +180,7 @@ export const extractCityData = (geoNamesResponse) => {
 
 export const extractRandomPhoto = (pixabayResponse) => {
   // Largest value of a "page" in returned photo results
-  let count = 100
+  let count = 40
   // Set count lower if fewer than count results were returned
   if (pixabayResponse.totalHits < count) {
       count = pixabayResponse.totalHits
@@ -185,6 +188,7 @@ export const extractRandomPhoto = (pixabayResponse) => {
   // Use numberOfPhotos-1 because this will be an array index
   const randomNumber = Math.round(Math.random() * (count - 1))
   console.log(`Random photo chosen #${randomNumber + 1} of ${count}`)
+  console.log(`pixabay response is ${JSON.stringify(pixabayResponse)}`)
   const randomPhoto = pixabayResponse.hits[randomNumber].webformatURL
 
   return randomPhoto

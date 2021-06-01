@@ -35,7 +35,7 @@ const WEATHERBIT_KEY_URL_AND_PARAMS = `&key=${process.env.WEATHERBIT_KEY}&units=
 // set up for pixabay API
 console.log(`Pixabay API key  => ${process.env.PIXABAY_KEY}`)
 const PIXABAY_ROOT = "https://pixabay.com/api/?q="
-const PIXABAY_KEY_URL_AND_PARAMS = `&key=${process.env.PIXABAY_KEY}&image_type=photo&orientation=horizontal&safesearch=true&per_page=100`
+const PIXABAY_KEY_URL_AND_PARAMS = `&key=${process.env.PIXABAY_KEY}&image_type=photo&orientation=horizontal&safesearch=true&per_page=45`
 
 
 app.get('/index', function(request,response){
@@ -46,7 +46,7 @@ app.get('/index', function(request,response){
 // Initalize an array to store API data 
 const apiData = []
 
-const storeApiData = (request,response) => {
+const storeApiData = async (request,response) => {
    // store all api response body here.
    apiData.push(request.body)
    responseMessage = {message:'Successfuly saved the api data'}
@@ -88,10 +88,10 @@ const callWeatherbit = async (wbRequest,wbResponse) => {
     const units = wbRequest.body.userData.units
 
     const weatherbitCompleteURL = WEATHERBIT_ROOT + `lat=${latitude}&lon=${longitude}` + WEATHERBIT_KEY_URL_AND_PARAMS + units
-    console.log(`Weahter bit complete url is ${weatherbitCompleteURL}`)
+    console.log(`Weather bit complete url is ${weatherbitCompleteURL}`)
 
     try {
-        const WeatherResponse = fetch(weatherbitCompleteURL)
+        const WeatherResponse = await fetch(weatherbitCompleteURL)
         if(!WeatherResponse.ok){
             wbResponse.send(null)
             console.error("hey i didn't proper response from weatherbit")
@@ -117,24 +117,25 @@ const callPixabay = async (pixaRequest,pixaResponse) => {
     console.log(`pixabay complete url is ${pixabayCompleteURL}`)
 
     try{
-        const response = fetch(pixabayCompleteURL)
+        const response = await fetch(pixabayCompleteURL)
         if(!response.ok){
             pixaResponse.send(null)
             console.error("hey i didn't proper response from pixabay")
         } else {
-            const jsonResponse = await response.json()
+            let jsonResponse = await response.json()
             console.log(jsonResponse)
             // Add a check if we didn't a image a for a city
-            if(jsonResponse.total === 0){
+            if(jsonResponse.total == 0){
                 console.log("No images are avalaible for the destination city, we are showing the image for country")
                 // We didn't get image for city. Let's show one for the country.
-                const response = fetch(pixabayCountryURL)
+                const response = await fetch(pixabayCountryURL)
                 if(!response.ok){
                     pixaResponse.send(null)
                     console.error("We didn't get country image from pixabay")
                 }
+                pixaResponse.send(response.json())
             }
-            pixResponse.send(jsonResponse)
+            pixaResponse.send(jsonResponse)
         }
 
     }catch(error){
@@ -144,7 +145,7 @@ const callPixabay = async (pixaRequest,pixaResponse) => {
    
 }
 
-app.post('storeApiData', storeApiData)
+app.post('/storeApiData', storeApiData)
 app.post('/geonames', callGeonames)
 app.post('/weatherbit',callWeatherbit)
 app.post('/pixabay', callPixabay)
