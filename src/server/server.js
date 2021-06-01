@@ -28,12 +28,12 @@ const GEONAMES_ROOT = "http://api.geonames.org/searchJSON?q="
 const GEONAMES_KEY_AND_PRAMS = `&username=${process.env.GEONAMES_KEY}&maxRows=1`
 
 // set up for weatherbit API.
-console.log(`Weatherbit API key  => ${process.env.GEONAMES_KEY}`)
+console.log(`Weatherbit API key  => ${process.env.WEATHERBIT_KEY}`)
 const WEATHERBIT_ROOT = "https://api.weatherbit.io/v2.0/forecast/daily?"
 const WEATHERBIT_KEY_URL_AND_PARAMS = `&key=${process.env.WEATHERBIT_KEY}&units=`
 
 // set up for pixabay API
-console.log(`Pixabay API key  => ${process.env.GEONAMES_KEY}`)
+console.log(`Pixabay API key  => ${process.env.PIXABAY_KEY}`)
 const PIXABAY_ROOT = "https://pixabay.com/api/?q="
 const PIXABAY_KEY_URL_AND_PARAMS = `&key=${process.env.PIXABAY_KEY}&image_type=photo&orientation=horizontal&safesearch=true&per_page=100`
 
@@ -54,9 +54,9 @@ const storeApiData = (request,response) => {
    console.log(responseMessage)
 }
 
-const callGeonames = async (request,response) => {
+const callGeonames = async (geoRequest,geoResponse) => {
      // const city = 'Toronto' 
-    const city = req.body.userData.destinationCity
+    const city = geoRequest.body.userData.destinationCity
     console.log(`request city is ${city}`)
 
     const geonamesCompleteURL = GEONAMES_ROOT + city + GEONAMES_KEY_AND_PRAMS
@@ -66,14 +66,14 @@ const callGeonames = async (request,response) => {
        const response = await fetch(geonamesCompleteURL)
        if(!response.ok){
            console.error("hey i didn't proper response from geonames")
-           response.send(null)
-       } else {
+           geoResponse.send(null)
+       } 
         const jsonResponse = await response.json()
         console.log(jsonResponse)
-        response.send(jsonResponse)
-       }
+        geoResponse.send(jsonResponse)
+
     } catch(error) {
-        response.send(null)
+        geoResponse.send(null)
         console.error(`Error is this - ${error}`)
 
     }
@@ -91,15 +91,14 @@ const callWeatherbit = async (wbRequest,wbResponse) => {
     console.log(`Weahter bit complete url is ${weatherbitCompleteURL}`)
 
     try {
-        const response = fetch(weatherbitCompleteURL)
-        if(!response.ok){
+        const WeatherResponse = fetch(weatherbitCompleteURL)
+        if(!WeatherResponse.ok){
             wbResponse.send(null)
             console.error("hey i didn't proper response from weatherbit")
-        } else {
-            const jsonResponse = await response.json()
+        }
+            const jsonResponse = await WeatherResponse.json()
             console.log(jsonResponse)
             wbResponse.send(jsonResponse)
-        }
 
     }catch(error){
         wbResponse.send(null)

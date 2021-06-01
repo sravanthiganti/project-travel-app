@@ -18,6 +18,36 @@ WEATHERBIT_KEY = {your key here}
 PIXABAY_KEY = {your key here}
 ```
 
+```
+enable web serivce for geonames at https://www.geonames.org/manageaccount
+
+request city is toronto
+geonamesCompleteURL is http://api.geonames.org/searchJSON?q=toronto&username=marutikarra&maxRows=1
+{
+  totalResultsCount: 997,
+  geonames: [
+    {
+      adminCode1: '08',
+      lng: '-79.4163',
+      geonameId: 6167865,
+      toponymName: 'Toronto',
+      countryId: '6251999',
+      fcl: 'P',
+      population: 2600000,
+      countryCode: 'CA',
+      name: 'Toronto',
+      fclName: 'city, village,...',
+      adminCodes1: [Object],
+      countryName: 'Canada',
+      fcodeName: 'seat of a first-order administrative division',
+      adminName1: 'Ontario',
+      lat: '43.70011',
+      fcode: 'PPLA'
+    }
+  ]
+}
+```
+
 ### TODO(before submitting) -- Show how to install and run the app.
 
 ### TODO -- Show how to use the app.
