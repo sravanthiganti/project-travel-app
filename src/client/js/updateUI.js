@@ -57,10 +57,10 @@ export const updateUI = (apiData) => {
     if (apiData.departFinishedAtDestination) {
         // Create the card div, data will append to this
         console.log("Making dummy card for today with departure date finished")
-        const forecastCard = document.createElement('div')
-        forecastCard.classList.add('forecast-card')
-        forecastCard.innerHTML = "<h3>Today's date in your local time is already finished at the destination, so no forecast for today.</h3>"
-        fragment.append(forecastCard)
+        const weatherForecastCards = document.createElement('div')
+        weatherForecastCards.classList.add('forecast-card')
+        weatherForecastCards.innerHTML = "<h3>Today's date in your local time is already finished at the destination, so no forecast for today.</h3>"
+        fragment.append(weatherForecastCards)
     }
     if (apiData.returnFinishedAtDestination) {
         console.log("Adding just dummy card because return date finished")
@@ -69,11 +69,11 @@ export const updateUI = (apiData) => {
         forecastCardContainer.append(fragment)
         return
     }
-    const forecasts = apiData.WeatherForecastData
+    const weatherForecasts = apiData.WeatherForecastData
 
     // Create a forecast card for each day in the trip
-    for (const forecast of forecasts) {
-        const forecastCard = Client.createForecastCard(forecast, apiData.userData.units)
+    for (const forecast of weatherForecasts) {
+        const forecastCard = Client.createWeatherForecastCards(forecast, apiData.userData.units)
 
         // Append the card to the fragment for now, leave the DOM alone
         fragment.append(forecastCard)
@@ -83,4 +83,89 @@ export const updateUI = (apiData) => {
     const forecastCardContainer = document.getElementById('forecast-card-container')
     forecastCardContainer.innerHTML = ""
     forecastCardContainer.append(fragment)
+}
+
+
+export const createWeatherForecastCards = (forecast, units) => {
+
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    let temperature, speed,depth
+   
+    if (units == "I") {
+        temperature = "F"
+        speed = "mph"
+        depth = "inches"
+    } else {
+        temperature = "deg C"
+        speed = "m/s"
+        depth = "mm"
+    }
+
+    // Create the card div, data will append to this
+    const weatherForecastCards = document.createElement('div')
+    weatherForecastCards.classList.add('forecast-card')
+
+    // Create all div elements
+    const dateDiv = document.createElement('div')
+    const descriptionDiv = document.createElement('div')
+    const highTemperatureDiv = document.createElement('div')
+    const lowTemperatureDiv = document.createElement('div')
+    const humidityDiv = document.createElement('div')
+    const chancePrecipitationDiv = document.createElement('div')
+    const precipitationDiv = document.createElement('div')
+    const snowDiv = document.createElement('div')
+    const windSpeedDiv = document.createElement('div')
+    const windDirectionDiv = document.createElement('div')
+
+    dateDiv.classList.add('date')
+    const dayOfWeek = days[new Date(forecast.date).getDay()]
+    dateDiv.innerHTML = `<h4 class="card-date">${forecast.date}<br>${dayOfWeek}</h4>`
+
+    // icon div and link to icon image
+    const icon = document.createElement('img')
+    icon.classList.add('icon')
+    icon.src = `./images/${forecast.icon}.png`
+    icon.alt = "Showing weather icons"
+
+    // weather description
+    descriptionDiv.classList.add('description')
+    descriptionDiv.innerHTML = forecast.description
+    // high temperature
+    highTemperatureDiv.classList.add('high-temperature')
+    highTemperatureDiv.innerHTML = `High Temp: ${forecast.highTemperature}°${temperature}`
+    // low temperature
+    lowTemperatureDiv.classList.add('low-temperature')
+    lowTemperatureDiv.innerHTML = `Low Temp: ${forecast.lowTemperature}°${temperature}`
+    // relative humidity 
+    humidityDiv.classList.add('humidity')
+    humidityDiv.innerHTML = `Humidity: ${forecast.humidity}%`
+    // precipitation chance
+    chancePrecipitationDiv.classList.add('chance-precipitation')
+    chancePrecipitationDiv.innerHTML = `Precipitation Chance: ${forecast.chancePrecipitation}%`
+    // amount of precipitation
+    precipitationDiv.classList.add('precipitation')
+    precipitationDiv.innerHTML = `Precipitation Amount: ${forecast.precipitation.toFixed(1)}${depth}`
+    // amount of snow
+    snowDiv.classList.add('snow')
+    snowDiv.innerHTML = `Snow : ${forecast.snow.toFixed(1)}${depth}`
+    // wind speed
+    windSpeedDiv.classList.add('wind-speed')
+    windSpeedDiv.innerHTML = `Wind Speed: ${forecast.windSpeed.toFixed(1)}${speed}`
+    // wind direction
+    windDirectionDiv.classList.add('wind-direction')
+    windDirectionDiv.innerHTML = `Wind direction: ${forecast.windDirection}°`
+    // Append the data
+    weatherForecastCards.append(dateDiv)
+    weatherForecastCards.append(icon)
+    weatherForecastCards.append(descriptionDiv)
+    weatherForecastCards.append(highTemperatureDiv)
+    weatherForecastCards.append(lowTemperatureDiv)
+    weatherForecastCards.append(humidityDiv)
+    weatherForecastCards.append(chancePrecipitationDiv)
+    weatherForecastCards.append(precipitationDiv)
+    weatherForecastCards.append(snowDiv)
+    weatherForecastCards.append(windSpeedDiv)
+    weatherForecastCards.append(windDirectionDiv)
+
+    return weatherForecastCards
 }

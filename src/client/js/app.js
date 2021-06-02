@@ -1,6 +1,6 @@
 const countdown = require('countdown')
 
-export const submitted = async (event) => {
+export const submit = async (event) => {
     // Prevents page reloading when button is clicked
     event.preventDefault()
     console.log('Event listener connected')

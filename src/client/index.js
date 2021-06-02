@@ -1,14 +1,12 @@
-//  Webpack build tool needs this
-// Import functions from other files
-import { submitted ,checkLocalStorage,clearLocalStorage } from './js/app'
-import { updateUI } from './js/updateUI'
+// Webpack build tool needs this
+import { submit ,checkLocalStorage,clearLocalStorage } from './js/app'
+import { updateUI, createWeatherForecastCards } from './js/updateUI'
 import { callApis,extractCityData,extractForecastData,extractRandomPhoto } from './js/call-apis'
-import { createForecastCard } from './js/createForecastCard'
 
 
 // Export functions to Client library (see webpack.dev and webpack.prod files)
 export {
-    submitted,
+    submit,
     updateUI,
     checkLocalStorage,
     clearLocalStorage,
@@ -16,14 +14,13 @@ export {
     extractCityData,
     extractForecastData,
     extractRandomPhoto,
-    createForecastCard
+    createWeatherForecastCards 
 }
 
-import './styles/resets.scss'
-import './styles/base.scss'
-import './styles/footer.scss'
+import './styles/weathercard.scss'
+import './styles/styles.scss'
 import './styles/form.scss'
-import './styles/header.scss'
+
 
 // Import weather images from icon folder
 import './images/a01d.png'
@@ -97,7 +94,7 @@ import './images/u00d.png'
 
     // Add click listener on submit button
     const submitButton = document.getElementById('submit-button')
-    submitButton.addEventListener('click', submitted)
+    submitButton.addEventListener('click', submit)
 
     // Add listener to update the UI from local storage if it exists
     window.addEventListener('load', checkLocalStorage)
