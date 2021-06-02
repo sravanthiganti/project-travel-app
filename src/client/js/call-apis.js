@@ -59,11 +59,11 @@ export const callApis = async (apiData) => {
 const apiCaller = async (apiUrl,apiData) => {
      try{
         console.log(`apiData is ${apiData}`)
-        const port = process.env.PORT || 9999;
+        const port = 9999;
         console.log(`port is ${port}`)
         // for some reason local host not working on heroku
-        //const localUrl = `http://localhost:${port}${apiUrl}`
-        const localUrl = `http://0.0.0.0:${port}${apiUrl}`
+        const localUrl = `http://localhost:${port}${apiUrl}`
+        //const localUrl = `http://0.0.0.0:${port}${apiUrl}`
         console.log(`URL is ${localUrl}`)
         const response = await fetch(localUrl, {
             method: 'POST',
