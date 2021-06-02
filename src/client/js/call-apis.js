@@ -59,7 +59,8 @@ export const callApis = async (apiData) => {
 const apiCaller = async (apiUrl,apiData) => {
      try{
         console.log(`apiData is ${apiData}`)
-        const localUrl = `http://localhost:9999${apiUrl}`
+        const port = process.env.PORT || 9999;
+        const localUrl = `http://localhost:${port}${apiUrl}`
         console.log(`URL is ${localUrl}`)
         const response = await fetch(localUrl, {
             method: 'POST',
@@ -72,7 +73,7 @@ const apiCaller = async (apiUrl,apiData) => {
         })
         // Return null if server route was not found
         if (!response.ok) {
-            console.log(`Error connecting to http://localhost:9999${apiUrl}. Response status ${response.status}`)
+            console.log(`Error connecting to http://localhost:${port}${apiUrl}. Response status ${response.status}`)
             return null
         }
         const responseJSON = await response.json()

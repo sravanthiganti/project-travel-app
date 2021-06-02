@@ -59,7 +59,7 @@ module.exports = {
         new FaviconsWebpackPlugin({
             logo: './src/client/images/favicon.ico',
             mode: 'light',
-        }),
+        })
     ],
     optimization: {
         minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
