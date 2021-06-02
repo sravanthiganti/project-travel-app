@@ -60,6 +60,7 @@ const apiCaller = async (apiUrl,apiData) => {
      try{
         console.log(`apiData is ${apiData}`)
         const port = process.env.PORT || 9999;
+        console.log(`port is ${port}`)
         const localUrl = `http://localhost:${port}${apiUrl}`
         console.log(`URL is ${localUrl}`)
         const response = await fetch(localUrl, {
