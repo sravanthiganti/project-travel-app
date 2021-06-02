@@ -62,9 +62,15 @@ const apiCaller = async (apiUrl,apiData) => {
         const port = 8081;
         console.log(`port is ${port}`)
         const mode = process.env.NODE_ENV;
-        const localUrl = `http://localhost:${port}${apiUrl}`
-        mode === "DEV" ? `${localUrl}`: apiUrl
-        console.log(`URL is ${localUrl}`)
+        let localUrl;
+        // mode === "DEV" ? `${localUrl}`: apiUrl
+        if(mode === "DEV"){
+           localUrl = `http://localhost:${port}${apiUrl}`
+           console.log(`URL is ${localUrl}`)
+        } else{
+            localUrl = apiUrl
+            console.log(`URL is ${localUrl}`)
+        }
         const response = await fetch(localUrl, {
             method: 'POST',
             credentials: 'same-origin',
