@@ -61,9 +61,9 @@ const apiCaller = async (apiUrl,apiData) => {
         console.log(`apiData is ${apiData}`)
         const port = 8081;
         console.log(`port is ${port}`)
-        // for some reason local host not working on heroku
+        const mode = process.env.NODE_ENV;
         const localUrl = `http://localhost:${port}${apiUrl}`
-        //const localUrl = `https://0.0.0.0:${port}${apiUrl}`
+        mode === "DEV" ? `${localUrl}`: apiUrl
         console.log(`URL is ${localUrl}`)
         const response = await fetch(localUrl, {
             method: 'POST',
