@@ -9,7 +9,7 @@ export const submit = async (event) => {
     const errorMessage = document.getElementById('error-message')
     errorMessage.innerHTML = ""
     document.getElementById('forecast-card-container').innerHTML = ""
-    document.getElementById('how-many-sleeps').innerHTML = ""
+    document.getElementById('duration-of-trip').innerHTML = ""
     document.getElementById('location-image-container').innerHTML = ""
     document.getElementById('forecast-title').innerHTML = ""
 

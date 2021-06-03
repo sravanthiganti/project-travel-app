@@ -9,9 +9,9 @@ export const updateUI = (apiData) => {
     } else {
         messageEnd = `is coming up in ${apiData.userData.timeUntilTrip} days!`
     }
-    document.getElementById('how-many-sleeps').innerHTML = `Your ${apiData.userData.tripDuration + 1}-day trip to ${apiData.userData.destinationCity}, ${apiData.cityData.country} ${messageEnd}`
+    document.getElementById('duration-of-trip').innerHTML = `Your ${apiData.userData.tripDuration + 1}-day trip to ${apiData.userData.destinationCity}, ${apiData.cityData.country} ${messageEnd}`
 
-    document.getElementById('forecast-title').innerHTML = "Here is the forecast for your trip:"
+    document.getElementById('forecast-title').innerHTML = "Forecast for the trip:"
 
 
     // Image of the location

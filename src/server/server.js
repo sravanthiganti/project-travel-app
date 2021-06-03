@@ -54,9 +54,8 @@ const apiData = []
 const storeApiData = async (request,response) => {
    // store all api response body here.
    apiData.push(request.body)
-   responseMessage = {message:'Successfuly saved the api data'}
-   response.send(responseMessage)
-   console.log(responseMessage)
+   response.send({message:'Successfuly saved the api data'})
+   console.log({message:'Successfuly saved the api data'})
 }
 
 const callGeonames = async (geoRequest,geoResponse) => {
@@ -155,8 +154,7 @@ app.post('/geonames', callGeonames)
 app.post('/weatherbit',callWeatherbit)
 app.post('/pixabay', callPixabay)
 
+// You want to allow each test file to start a server on their own. To do this, you need to export app without listening to it.
+module.exports = app
 
 
-app.listen(port,
-    () => console.log(`Travel weather app is listening on port ${port}!`)
-)

@@ -1,10 +1,9 @@
 const fetch = require('node-fetch')
-// const app = require('../../server/server')
 
 /**
  * 
  * @param {*} apiData -- it stores all API responses 
- * @returns void
+ * @returns apiData
  */
 
 export const callApis = async (apiData) => {
@@ -56,15 +55,16 @@ export const callApis = async (apiData) => {
  * - helper function that can be reuesed by geonames, weatherbit , pixabay and to store data.
  */
 
-const apiCaller = async (apiUrl,apiData) => {
+export const apiCaller = async (apiUrl,apiData) => {
      try{
         console.log(`apiData is ${apiData}`)
         const port = 8081;
         console.log(`port is ${port}`)
         const mode = process.env.NODE_ENV;
+        console.log(`mode is ${mode}`)
         let localUrl;
-        // mode === "DEV" ? `${localUrl}`: apiUrl
-        if(mode === "DEV"){
+        // adding test for jest tests
+        if(mode === "DEV" || "test"){
            localUrl = `http://localhost:${port}${apiUrl}`
            console.log(`URL is ${localUrl}`)
         } else{
