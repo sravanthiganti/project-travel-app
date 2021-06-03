@@ -63,8 +63,8 @@ export const apiCaller = async (apiUrl,apiData) => {
         const mode = process.env.NODE_ENV;
         console.log(`mode is ${mode}`)
         let localUrl;
-        // adding test for jest tests
-        if(mode === "DEV" || "test"){
+        // adding 'test' for jest tests
+        if(mode === "DEV"){
            localUrl = `http://localhost:${port}${apiUrl}`
            console.log(`URL is ${localUrl}`)
         } else{
