@@ -1,13 +1,13 @@
-$primary-colour: #b4afac;
-$shadow-colour: #6b6867;
-$inactive-colour: rgba(29, 28, 27, 0.6);
-$hover-colour: rgb(133, 139, 139);
-$h1-font-size: 4rem;
+$primary-colour: #0f0f0f;
+$shadow-colour: #3f3e3d;
+$inactive-colour: rgba(153, 150, 148, 0.5);
+$hover-colour: rgb(82, 91, 92);
+$h1-font-size: 5rem;
 $h2-font-size: 3rem;
 $h3-font-size: 2.5rem;
-$h4-font-size: 1.5rem;
-$footer-font-size: 1rem;
-$reg-font-size: 1rem;
+$h4-font-size: 2rem;
+$footer-font-size: 1.5rem;
+$reg-font-size: 2rem;
 
 h1 {
     font-size: $h1-font-size;
@@ -95,25 +95,14 @@ header {
     }
 }
 
-.api-logo-container {
-    grid-area: 5/1/6/2;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-
-    .logo {
-        height: 50px;
-        margin-bottom: 20px;
-    }
-}
 
 footer {
     grid-area: 6/1/7/2;
     color: $primary-colour;
     font-size: $footer-font-size;
-    font-weight: bold;
+    font-weight: Medium;
     padding: 10px;
-    margin-top: 40px;
+    margin-top: 20px;
     text-shadow: 1px 1px 1px $shadow-colour;
 }
 
@@ -128,18 +117,5 @@ footer {
     .location-image-container {
         margin-top: auto;
         margin-bottom: auto;
-    }
-
-    .api-logo-container {
-        flex-direction: row;
-        align-content: center;
-        justify-content: space-around;
-        margin-top: 40px;
-
-        .api-link {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
     }
 }

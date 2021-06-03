@@ -115,7 +115,7 @@ export const createWeatherForecastCards = (forecast, units) => {
     const precipitationDiv = document.createElement('div')
     const snowDiv = document.createElement('div')
     const windSpeedDiv = document.createElement('div')
-    const windDirectionDiv = document.createElement('div')
+ 
 
     dateDiv.classList.add('date')
     const dayOfWeek = days[new Date(forecast.date).getDay()]
@@ -151,21 +151,19 @@ export const createWeatherForecastCards = (forecast, units) => {
     // wind speed
     windSpeedDiv.classList.add('wind-speed')
     windSpeedDiv.innerHTML = `Wind Speed: ${forecast.windSpeed.toFixed(1)}${speed}`
-    // wind direction
-    windDirectionDiv.classList.add('wind-direction')
-    windDirectionDiv.innerHTML = `Wind direction: ${forecast.windDirection}°`
-    // Append the data
+
     weatherForecastCards.append(dateDiv)
     weatherForecastCards.append(icon)
     weatherForecastCards.append(descriptionDiv)
     weatherForecastCards.append(highTemperatureDiv)
     weatherForecastCards.append(lowTemperatureDiv)
-    weatherForecastCards.append(humidityDiv)
     weatherForecastCards.append(chancePrecipitationDiv)
     weatherForecastCards.append(precipitationDiv)
     weatherForecastCards.append(snowDiv)
     weatherForecastCards.append(windSpeedDiv)
-    weatherForecastCards.append(windDirectionDiv)
+    weatherForecastCards.append(humidityDiv)
+   
+ 
 
     return weatherForecastCards
 }
