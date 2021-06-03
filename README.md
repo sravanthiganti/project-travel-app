@@ -70,13 +70,5 @@ npm run start
 
 This app is deployed on Heroku. You can access it here at [Travel WeatherApp](https://travel-weather-app-by-mskarra.herokuapp.com/)
 
-### Results with Screenshots.
-
-![Screenshot1](https://github.com/sravanthiganti/project-travel-app/blob/main/results/TravelApp0.png)
-
-![Screenshot2](https://github.com/sravanthiganti/project-travel-app/blob/main/results/TravelApp1.png)
-
-![Screenshot3](https://github.com/sravanthiganti/project-travel-app/blob/main/results/TravelApp2.png)
-
 
 
