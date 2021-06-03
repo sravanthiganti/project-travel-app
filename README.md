@@ -25,7 +25,7 @@ PIXABAY_KEY = {your key here}
 enable web serivce for geonames at https://www.geonames.org/manageaccount
 
 request city is toronto
-geonamesCompleteURL is http://api.geonames.org/searchJSON?q=toronto&username=marutikarra&maxRows=1
+geonamesCompleteURL is http://api.geonames.org/searchJSON?q=toronto&username=api-key-here&maxRows=1
 {
   totalResultsCount: 997,
   geonames: [
@@ -50,11 +50,33 @@ geonamesCompleteURL is http://api.geonames.org/searchJSON?q=toronto&username=mar
   ]
 }
 ```
+### Build and Install locally
 
-### TODO(before submitting) -- Show how to install and run the app.
+```
+npm install
 
-### TODO -- Show how to use the app.
+DEV build: 
+
+npm run build-dev
+
+PROD Build
+npm run build-prod
+
+Run locally
+
+npm run start
+
+```
+
+This app is deployed on Heroku. You can access it here at [Travel WeatherApp](https://travel-weather-app-by-mskarra.herokuapp.com/)
 
 ### Results with Screenshots.
 
- - Add Screenshots here.
+![Screenshot1](https://github.com/sravanthiganti/project-travel-app/blob/main/results/TravelApp0.png)
+
+![Screenshot2](https://github.com/sravanthiganti/project-travel-app/blob/main/results/TravelApp1.png)
+
+![Screenshot3](https://github.com/sravanthiganti/project-travel-app/blob/main/results/TravelApp2.png)
+
+
+

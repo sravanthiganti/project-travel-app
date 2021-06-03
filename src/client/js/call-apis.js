@@ -63,7 +63,8 @@ export const apiCaller = async (apiUrl,apiData) => {
         const mode = process.env.NODE_ENV;
         console.log(`mode is ${mode}`)
         let localUrl;
-        // adding 'test' for jest tests
+        // adding 'test' for jest tests -- doesn't work on heroku
+        //  if(mode === "DEV" || "test")
         if(mode === "DEV"){
            localUrl = `http://localhost:${port}${apiUrl}`
            console.log(`URL is ${localUrl}`)
